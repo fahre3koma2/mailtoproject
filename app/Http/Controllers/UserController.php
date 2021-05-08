@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $data['users'] = User::query()->with(['biodata'])->orderBy('name')->get();
+        $data['users'] = User::query()->with(['biodata'])->where('name', '!=', 'Admin')->orderBy('name')->get();
         return view('user.index', $data);
     }
 
@@ -92,6 +92,22 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        $edit = true;
+
+        try {
+            $menu = 'User';
+            $user = User::query()->with(['biodata'])->find(decrypt($id));
+
+            $data = [
+                    'menu' => $menu,
+                    'edit' => $edit,
+                    'user' => $user,
+                ];
+
+            return view('user.detail', $data);
+        } catch (Exception $ex) {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -147,9 +163,8 @@ class UserController extends Controller
             $biodata->update($data);
 
             alert()->success('Berhasil', 'User Berhasil di Update');
-            Alert::success('Data berhasil dihapus');
 
-            return redirect()->route('user.index');
+            return redirect()->route('user');
 
         } catch (Exception $ex) {
 

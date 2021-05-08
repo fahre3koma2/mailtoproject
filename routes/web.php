@@ -16,11 +16,16 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('auth.login');
 });
 
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/dashboard', [KirimEmailController::class, 'index'])->name('dashboard');
 
-Route::resource('/kirimemail', KirimEmailController::class);
-Route::get('/kirim/{id}', [KirimEmailController::class, 'send'])->name('kirim');
-Route::get('/verifikasi/{id}', [KirimEmailController::class, 'verifikasi'])->name('verifikasi');
-Route::resource('/user', UserController::class);
+    Route::resource('/kirimemail', KirimEmailController::class);
+    Route::get('/kirim/{id}', [KirimEmailController::class, 'send'])->name('kirim');
+    Route::get('/verifikasi/{id}', [KirimEmailController::class, 'verifikasi'])->name('verifikasi');
+    Route::resource('/user', UserController::class);
+
+
+});

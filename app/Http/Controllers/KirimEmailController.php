@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Mail\KodingEmail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+use App\Models\User;
 use App\Models\Biodata;
 use Exception;
 use Alert;
@@ -16,6 +18,23 @@ class KirimEmailController extends Controller
     public function index()
     {
         //
+        $data['email'] = User::query()->with(['biodata'])->where('name', '!=', 'Admin')->count();
+
+        $data['sudah'] = User::query()
+        ->with(['biodata'])
+        ->where('name', '!=', 'Admin')
+        ->whereHas('biodata', function ($q) {
+            $q->where('status', '=', 'done');
+        })->count();
+
+        $data['belum'] = User::query()
+        ->with(['biodata'])
+        ->where('name', '!=', 'Admin')
+        ->whereHas('biodata', function ($q) {
+            $q->where('status', '=', null );
+        })->count();
+
+        return view('dashboard', $data);
 
     }
 
@@ -36,6 +55,7 @@ class KirimEmailController extends Controller
     public function show($id)
     {
         //
+
     }
 
     public function edit($id)
@@ -87,19 +107,21 @@ class KirimEmailController extends Controller
                 //$penerima = 'mishaprimaresty@gmail.com';
                 $penerima = $biodata->user->email;
 
+                //Mail::to($penerima)->send(new KodingEmail($biodata));
+
                 Mail::send('isiemail', array('biodata' => $biodata), function ($pesan) use ($penerima) {
-                $pesan->to($penerima , 'Verifikasi')->subject('Verifikasi Email');
-                $pesan->from(env('MAIL_USERNAME', 'laravelmailto8@gmail.com'), 'No-Reply');
+                $pesan->to($penerima , 'Verifikasi')->subject('Pernyataan Kepatuhan');
+                $pesan->from(env('MAIL_USERNAME', 'laravelmailto8@gmail.com'), 'Pernyataan Kepatuhan');
 
-                alert()->success('Berhasil', 'Email Terkirim');
+                });
 
-                return redirect()->route('user');
+                alert()->success('Berhasil', 'Email Berhasil Dikirim');
 
-            });
+                return redirect()->route('user.index');
 
-        } catch (Exception $e) {
-            return response(['status' => false, 'errors' => $e->getMessage()]);
-        }
+            } catch (Exception $e) {
+                return response(['status' => false, 'errors' => $e->getMessage()]);
+            }
     }
 
     // public function send(Request $request)

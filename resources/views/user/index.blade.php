@@ -64,11 +64,24 @@
                 </td>
                 <td>
                     <a href="{{ route('kirim', ['id' => encrypt($value->id)]) }}" class="btn btn-sm btn-info"><i class="fa fa-paper-plane"></i> Kirim Email</a> |
+                    {{-- <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-list"></i> Aksi</button>
+                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                        <span class="sr-only">Toggle Dropdown</span>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('user.show', ['user' => encrypt($value->id)]) }}">Detail</a>
+                            <a class="dropdown-item" href="{{ route('user.edit', ['user' => encrypt($value->id)]) }}">Edit</a>
+                            <a class="dropdown-item" href="#">Delete</a>
+                        </div>
+                        </button>
+                    </div> --}}
+                    <a class="btn btn-sm btn-primary" href="{{ route('user.show', ['user' => encrypt($value->id)]) }}"><i class="fa fa-list"></i> Detail</a> |
                     <a class="btn btn-sm btn-warning" href="{{ route('user.edit', ['user' => encrypt($value->id)]) }}"><i class="fa fa-edit"></i> Edit</a> |
                     <button type="button" class="btn btn-sm btn-danger delete" data-id="{{ $value->id }}" data-file="{{$value->id}}"><i class="fa fa-trash"></i> Hapus</button>
                     {{ Form::open(['url'=>route('user.destroy', [Crypt::encrypt($value->id)]), 'method'=>'delete', 'id' => $value->id, 'style' => 'display: none;']) }}
                     {{ csrf_field() }}
                     {{ Form::close() }}
+
                 </td>
         </tr>
         @endforeach

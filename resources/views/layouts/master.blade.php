@@ -36,13 +36,13 @@
 
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <span class="d-none d-md-inline"><i class="nav-icon fas fa-user"></i>  Alexander Pierce</span>
+          <span class="d-none d-md-inline"><i class="nav-icon fas fa-user"></i> - {{ auth()->user()->name }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-info">
             <p>
-              Alexander Pierce - Web Developer
+              {{ auth()->user()->name }}
               {{--  <small>Member since Nov. 2012</small>  --}}
             </p>
           </li>
@@ -50,7 +50,10 @@
           <!-- Menu Footer-->
           <li class="user-footer">
             {{--  <a href="#" class="btn btn-default btn-flat">Profile</a>  --}}
-            <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"  class="btn btn-default btn-flat float-right">Sign out</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
           </li>
         </ul>
       </li>
@@ -61,7 +64,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ url('/') }}" class="brand-link navbar-info">
+    <a href="{{ url('/dashboard') }}" class="brand-link navbar-info">
       <span class="brand-text font-weight-blue">Kirim Email</span>
     </a>
 
@@ -72,11 +75,18 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
+            <a href="{{ url('dashboard') }}" class="nav-link">
+              <i class="nav-icon fas fa-th-large"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('user') }}" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>User Email</p>
             </a>
           </li>
+
 
         </ul>
       </nav>

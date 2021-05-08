@@ -16,10 +16,12 @@ class KodingEmail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($biodata)
     {
         //
-        $this->subject('Sample title');
+        $this->subject('No-Reply');
+
+        $this->biodata = $biodata;
     }
 
     /**
@@ -30,11 +32,10 @@ class KodingEmail extends Mailable
     public function build()
     {
         return $this->from('laravelmailto8@gmail.com')
-            ->view('emailku')
+            ->view('isiemail')
             ->with(
             [
-                'nama' => 'Misha',
-                'website' => 'mishaprimaresty@gmail.com',
+                'biodata' => $this->biodata,
             ]);
     }
 }
