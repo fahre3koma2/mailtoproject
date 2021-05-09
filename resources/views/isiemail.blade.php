@@ -3,6 +3,7 @@
 		<tr>
 			<td>
 				<div style="overflow: hidden;">
+                    <img src="{{ url('upload/dota2.png') }}" width="30%"  height="30%" style="text-align: center;">
 					<div dir="auto" style="font-size: 1rem; word-spacing: 1px; font-family: 'Times New Roman',Times,serif; text-align: center; line-height: 25px; padding-bottom: 20px; border-color: #000000;">&nbsp;</div>
 					<div dir="auto" style="font-size: 1rem; word-spacing: 1px; font-family: 'Times New Roman',Times,serif; text-align: center; line-height: 25px; padding-bottom: 20px; border-color: #000000;">PERNYATAAN KEPATUHAN TERHDAP PEDOMAN PERILAKU ETIKA
 						<br />PT SEMEN INDONESIA (PERSERO) Tbk
@@ -26,11 +27,11 @@
 								<td style="font-size: 1rem; border-color: #000000;">:</td>
 								<td style="font-size: 1rem; border-color: #000000;">{{ $biodata->jabatan }}</td>
 							</tr>
-							<tr style="border-color: #808080;">
+							{{--  <tr style="border-color: #808080;">
 								<td style="font-size: 1rem; border-color: #000000;">Unit/Penugasan</td>
 								<td style="font-size: 1rem; border-color: #000000;">:</td>
 								<td style="font-size: 1rem; border-color: #000000;">{{ $biodata->unit }}</td>
-							</tr>
+							</tr>  --}}
 							<tr style="border-color: #808080;">
 								<td style="font-size: 1rem; vertical-align: top; border-color: #000000;">Alamat</td>
 								<td style="font-size: 1rem; vertical-align: top; border-color: #000000;">:</td>

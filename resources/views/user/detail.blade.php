@@ -63,10 +63,10 @@
                 <label>Jabatan</label>
                 <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ $edit ? $user->biodata->jabatan : old('jabatan') }}" disabled>
             </div>
-            <div class="form-group">
+            {{--  <div class="form-group">
                 <label>Unit/Penugasan</label>
                 <input type="text" class="form-control" id="unit" name="unit" value="{{ $edit ? $user->biodata->unit : old('unit') }}" disabled>
-            </div>
+            </div>  --}}
             <div class="form-group">
                 <label>Alamat</label>
                 <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $edit ? $user->biodata->alamat : old('alamat') }}" disabled>

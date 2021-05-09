@@ -97,17 +97,8 @@ class KirimEmailController extends Controller
         try {
                 $biodata = Biodata::query()->with(['user'])->findOrFail(decrypt($id));
 
-                //dd($biodata);
-                // $pesan =    'Yang bertanda tangan di bawah ini :' . "\n" .
-                // 'Nama :' . "\n" .
-                //     'Nomor :' . "\n\n\n" .
-                //     'Menyatakan Bahwa :' . "\n";
-                // $perhatian = 'Untuk mengunduh dokumen klik link :' . "\n";
-
                 //$penerima = 'mishaprimaresty@gmail.com';
                 $penerima = $biodata->user->email;
-
-                //Mail::to($penerima)->send(new KodingEmail($biodata));
 
                 Mail::send('isiemail', array('biodata' => $biodata), function ($pesan) use ($penerima) {
                 $pesan->to($penerima , 'Verifikasi')->subject('Pernyataan Kepatuhan');

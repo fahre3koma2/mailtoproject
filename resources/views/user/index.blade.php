@@ -39,7 +39,7 @@
         <tr>
         <th>No</th>
         <th>Nama</th>
-        <th>Unit</th>
+        {{--  <th>Unit</th>  --}}
         <th>Jabatan</th>
         <th>Email</th>
         <th>Status</th>
@@ -52,7 +52,7 @@
         <tr>
                 <td>{{ $no++ }}</td>
                 <td>{{ $value->name }}</td>
-                <td>{{ $value->biodata->unit }}</td>
+                {{--  <td>{{ $value->biodata->unit }}</td>  --}}
                 <td>{{ $value->biodata->jabatan }}</td>
                 <td>{{ $value->email }}</td>
                 <td>

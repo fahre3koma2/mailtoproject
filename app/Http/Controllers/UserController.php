@@ -71,7 +71,7 @@ class UserController extends Controller
             $data['login_type'] = 'app';
 
             $user = User::create($data);
-            //$user->assignRole('user');
+            $user->assignRole('user');
 
             $data['user_id'] = $user->id;
             $biodata = Biodata::create($data);
@@ -152,9 +152,9 @@ class UserController extends Controller
     {
         //
         $data = $request->except('_token');
-        Validator::make($data, [
-            'email' => ['required', Rule::unique('users')->ignore(decrypt($id))],
-        ]);
+        // Validator::make($data, [
+        //     'email' => ['required', Rule::unique('users')->ignore(decrypt($id))],
+        // ]);
 
         try {
 
@@ -168,7 +168,7 @@ class UserController extends Controller
 
             alert()->success('Berhasil', 'User Berhasil di Update');
 
-            return redirect()->route('user');
+            return redirect()->route('user.index');
 
         } catch (Exception $ex) {
 
