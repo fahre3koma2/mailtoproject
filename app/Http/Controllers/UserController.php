@@ -57,9 +57,13 @@ class UserController extends Controller
         //
         $data = $request->except('_token');
 
-        Validator::make($data, User::RULES, User::ERROR_MESSAGES)->validate();
+        $validator = Validator::make($data, User::$rules, User::$errormessage);
 
-        //dd($data);
+        if ($validator->fails()) {
+            $errormessage = $validator->messages();
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         try {
             // $data['userid_created'] = Auth::user()->id;
             // $data['userid_updated'] = Auth::user()->id;
@@ -67,7 +71,7 @@ class UserController extends Controller
             $data['login_type'] = 'app';
 
             $user = User::create($data);
-            $user->assignRole('user');
+            //$user->assignRole('user');
 
             $data['user_id'] = $user->id;
             $biodata = Biodata::create($data);

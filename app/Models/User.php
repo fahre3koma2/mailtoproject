@@ -55,8 +55,17 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
+
+    public static $rules = [
+        'email' => 'required',
+    ];
+
+    public static $errormessage = [
+        'email.required' => 'EMAIL Tidak Boleh Kosong / Harus Diisi',
+    ];
+
+    public const ERROR_MESSAGES = [
+        'email' => 'email tidak boleh kosong',
     ];
 
     public function biodata()
