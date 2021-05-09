@@ -63,7 +63,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('kirim', ['id' => encrypt($value->id)]) }}" class="btn btn-sm btn-info"><i class="fa fa-paper-plane"></i> Kirim Email</a> |
+                    <a href="{{ route('kirim', ['id' => encrypt($value->biodata->id)]) }}" class="btn btn-sm btn-info"><i class="fa fa-paper-plane"></i> Kirim Email</a> |
                     {{-- <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-list"></i> Aksi</button>
                         <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-icon" data-toggle="dropdown">
