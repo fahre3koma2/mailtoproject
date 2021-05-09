@@ -104,7 +104,7 @@ class KirimEmailController extends Controller
 
                 Mail::send('isiemail', array('biodata' => $biodata), function ($pesan) use ($penerima) {
                 $pesan->to($penerima , 'Verifikasi')->subject('Pernyataan Kepatuhan');
-                $pesan->from(env('MAIL_USERNAME', 'laravelmailto8@gmail.com'), 'Pernyataan Kepatuhan');
+                $pesan->from(env('MAIL_USERNAME', 'mishaprimaresty@gmail.com'), 'Pernyataan Kepatuhan');
 
                 });
 
