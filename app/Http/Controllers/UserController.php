@@ -12,6 +12,7 @@ use Alert;
 use Exception;
 use Crypt;
 use Validator;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -23,8 +24,10 @@ class UserController extends Controller
     public function index()
     {
         //
+        //dd(Carbon::parse('2019-03-01')->translatedFormat('d F Y'));
         $data['users'] = User::query()->with(['biodata'])->where('name', '!=', 'Admin')->orderBy('name')->get();
         return view('user.index', $data);
+
     }
 
     /**
